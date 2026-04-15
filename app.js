@@ -11,7 +11,7 @@ const state = {
     itemCount: 0,
     batchStage: 0, // 0: 6 orders, 1: 5 orders, 2: 3 orders
     clusterImpactScore: 0,
-    popupShown: { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false },
+    popupShown: { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false },
     b1Timeout: null
 };
 
@@ -35,7 +35,8 @@ const popupContent = {
     5: { title: "The customer benefit is now visible", body: "Once enough nearby orders join, the group-buy discount unlocks and the batch can move earlier. The customer now sees the reward directly: lower cost and faster delivery created by shared local demand." },
     6: { title: "The transaction logic is now clear", body: "This screen makes the economics visible. The customer sees the subtotal, the group-buy discount, the platform fee, the final total, and how value is divided between the restaurant and the platform." },
     7: { title: "Now move from customer view to system view", body: "You have just seen how the customer experiences the platform. The next screens show what is happening behind that experience: orchestration, cluster management, settlement, and the intelligence layer that creates the moat." },
-    8: { title: "This is where the moat becomes investable", body: "The platform is not only improving delivery flow. It is also structuring how money moves, how settlement works, how fees are captured, and how operational intelligence compounds into a defensible advantage over new entrants." }
+    8: { title: "This is where the moat becomes investable", body: "The platform is not only improving delivery flow. It is also structuring how money moves, how settlement works, how fees are captured, and how operational intelligence compounds into a defensible advantage over new entrants." },
+    9: { title: "The model is now complete", body: "You have now seen the full system logic: live local demand, cluster formation, group-buy activation, optimized checkout, orchestration, settlement, and compounding intelligence. This is the foundation of the 1LT operating model.", buttonLabel: "End Experience" }
 };
 
 const menuPricing = {
@@ -51,7 +52,8 @@ function showPopup(num) {
     if (state.popupShown[num]) return;
     const root = document.getElementById('popup-root');
     const data = popupContent[num];
-    root.innerHTML = `<div class="popup-modal"><h2 class="popup-title">${data.title}</h2><p class="popup-body">${data.body}</p><button class="popup-button">Continue</button></div>`;
+    const btnLabel = data.buttonLabel || 'Continue';
+    root.innerHTML = `<div class="popup-modal"><h2 class="popup-title">${data.title}</h2><p class="popup-body">${data.body}</p><button class="popup-button">${btnLabel}</button></div>`;
     root.classList.add('active');
     state.popupShown[num] = true;
     root.querySelector('button').addEventListener('click', () => { root.classList.remove('active'); root.innerHTML = ''; });
@@ -179,11 +181,20 @@ async function showScreen(screenId) {
                         }
                         
                         // Bridge 'Continue' Button
-                        const continueBtn = iDoc.querySelector('footer div[class*="group"], footer .cursor-pointer');
+                        const isB5 = state.currentScreen === 'B5';
+                        const continueBtn = isB5
+                            ? iDoc.querySelector('#b5-continue-footer .cursor-pointer')
+                            : iDoc.querySelector('footer div[class*="group"], footer .cursor-pointer');
                         if (continueBtn) {
                             if (state.currentScreen === 'B1_1' || state.currentScreen === 'B1_2') {
                                 continueBtn.style.opacity = '0.3';
                                 continueBtn.style.pointerEvents = 'none';
+                            } else if (state.currentScreen === 'B5') {
+                                // Final screen: Continue is fully visible, triggers final popup
+                                continueBtn.style.opacity = '1';
+                                continueBtn.style.pointerEvents = 'auto';
+                                continueBtn.style.cursor = 'pointer';
+                                continueBtn.onclick = () => showPopup(9);
                             } else {
                                 continueBtn.style.opacity = '1';
                                 continueBtn.style.pointerEvents = 'auto';
@@ -290,16 +301,38 @@ function rebindEvents() {
         const input = mount.querySelector('input');
         const cont = buttons.find(b => b.innerText.includes('Continue'));
         const cur = buttons.find(b => b.innerText.toLowerCase().includes('current location'));
+        const demandCard = mount.querySelector('#demand-card');
+        const demandCount = mount.querySelector('#demand-count');
+
+        function getLiveCount() {
+            return Math.floor(Math.random() * 8) + 12;
+        }
+        function revealDemandCard() {
+            if (!demandCard || demandCard.classList.contains('visible')) return;
+            if (demandCount) demandCount.textContent = getLiveCount();
+            demandCard.classList.add('visible');
+        }
+
         if (cont) {
             cont.style.opacity = '0.5'; cont.style.pointerEvents = 'none';
             cont.onclick = () => showScreen('A3');
         }
         const act = () => { if (cont) { cont.style.opacity = '1'; cont.style.pointerEvents = 'auto'; } };
         if (input) {
-            const h = () => { if (input.value.length >= 1) act(); };
+            const h = () => {
+                if (input.value.length >= 1) {
+                    act();
+                    revealDemandCard();
+                }
+            };
             input.oninput = h; input.onkeyup = h; input.onchange = h;
         }
-        if (cur) cur.onclick = (e) => { e.preventDefault(); if (input) input.value = "Current Location"; act(); };
+        if (cur) cur.onclick = (e) => {
+            e.preventDefault();
+            if (input) input.value = "Current Location";
+            act();
+            revealDemandCard();
+        };
     }
 
     // A3 Interaction

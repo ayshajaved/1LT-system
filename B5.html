@@ -45,6 +45,12 @@
             font-family: 'JetBrains Mono', monospace;
             letter-spacing: -0.02em;
         }
+        #b5-continue-footer {
+            position: fixed;
+            bottom: 28px;
+            right: 48px;
+            z-index: 100;
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-primary/30 selection:text-primary h-full">
@@ -241,12 +247,9 @@
 </div>
 </div>
 <!-- Sticky Bottom Action -->
-<footer class="w-full mt-14 flex justify-between items-end shrink-0">
-<div class="flex gap-12">
-<!-- Empty for alignment consistency with reference screen layout structure if needed, or simply for spacing -->
-</div>
+<footer id="b5-continue-footer">
 <div class="cursor-pointer">
-<span class="text-[11px] font-bold tracking-[0.4em] uppercase text-[#CBA135]/70 hover:text-[#CBA135] transition-colors duration-300">Continue</span>
+<span class="text-[11px] font-bold tracking-[0.4em] uppercase text-[#CBA135] hover:text-[#CBA135]/80 transition-colors duration-300">Continue</span>
 </div></footer>
 </main>
 </body></html>

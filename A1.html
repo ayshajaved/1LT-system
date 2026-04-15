@@ -91,6 +91,32 @@
         body {
             min-height: max(884px, 100dvh);
         }
+        #demand-card {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            margin-top: 0;
+            transform: translateY(6px);
+            transition: opacity 0.35s ease, max-height 0.4s ease, margin-top 0.4s ease, transform 0.35s ease;
+            pointer-events: none;
+        }
+        #demand-card.visible {
+            opacity: 1;
+            max-height: 80px;
+            margin-top: 20px;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        #locating-indicator {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.3s ease, max-height 0.3s ease;
+        }
+        #locating-indicator.visible {
+            opacity: 1;
+            max-height: 32px;
+        }
     </style>
 </head>
 <body class="flex flex-col items-center min-h-screen">
@@ -115,16 +141,68 @@
 <span class="absolute bg-[#101215] px-3 text-[11px] font-medium text-[#AEB4BC] tracking-wider uppercase">OR</span>
 </div>
 <!-- Use Current Location -->
-<button class="flex items-center gap-2 text-[#C8A96B] text-[15px] font-medium active:scale-95 transition-transform">
+<button id="use-location-btn" class="flex items-center gap-2 text-[#C8A96B] text-[15px] font-medium active:scale-95 transition-transform">
 <span class="material-symbols-outlined text-[14px]" data-icon="near_me">near_me</span>
             Use Current Location
         </button>
+<!-- Locating indicator -->
+<div id="locating-indicator" class="flex items-center gap-2 text-[#AEB4BC] text-[12px]">
+<span class="material-symbols-outlined text-[13px] animate-spin" style="animation: spin 1s linear infinite;">progress_activity</span>
+  Locating you…
 </div>
-<!-- Live Demand Card -->
-<div class="w-[342px] bg-[#1D232A] border border-[#2A3036] rounded-[14px] flex items-center gap-3 py-[14px] px-4 mt-[32px]" style="background-color: #1D232A; border: 1px solid #2A3036;">
+</div>
+<!-- Live Demand Card (hidden until location is provided) -->
+<div id="demand-card" class="w-[342px] bg-[#1D232A] border border-[#2A3036] rounded-[14px] flex items-center gap-3 py-[14px] px-4" style="background-color: #1D232A; border: 1px solid #2A3036;">
 <div class="w-2 h-2 rounded-full bg-[#3FAE6A] shrink-0"></div>
-<p class="text-[14px] font-normal flex-grow leading-tight text-[#F2F4F7]"><span class="font-semibold">14</span> people ordering in your area right now</p>
+<p class="text-[14px] font-normal flex-grow leading-tight text-[#F2F4F7]"><span id="demand-count" class="font-semibold">14</span> people are ordering in your area right now</p>
 </div>
 <!-- Continue Button -->
 <button class="mb-[40px] w-[342px] h-[50px] bg-[#C1A062] text-[#101215] text-[16px] font-semibold rounded-[14px] flex items-center justify-center transition-opacity active:opacity-90 border-none shadow-none mt-[48px]">Continue</button>
+
+<style>
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+</style>
+
+<script>
+  (function () {
+    const demandCard = document.getElementById('demand-card');
+    const demandCount = document.getElementById('demand-count');
+    const addressInput = document.querySelector('input[type="text"]');
+    const useLocationBtn = document.getElementById('use-location-btn');
+    const locatingIndicator = document.getElementById('locating-indicator');
+
+    // Randomize count slightly so it feels live (12–19)
+    function getLiveCount() {
+      return Math.floor(Math.random() * 8) + 12;
+    }
+
+    function showDemandCard() {
+      demandCount.textContent = getLiveCount();
+      demandCard.classList.add('visible');
+    }
+
+    // Show after typing ≥3 characters in address field
+    let typingTimer = null;
+    addressInput.addEventListener('input', function () {
+      clearTimeout(typingTimer);
+      if (this.value.trim().length >= 3) {
+        typingTimer = setTimeout(showDemandCard, 300);
+      }
+    });
+
+    // Show after "Use Current Location" with a brief locating state
+    useLocationBtn.addEventListener('click', function () {
+      if (demandCard.classList.contains('visible')) return;
+      locatingIndicator.classList.add('visible');
+      useLocationBtn.style.opacity = '0.5';
+      useLocationBtn.style.pointerEvents = 'none';
+      setTimeout(function () {
+        locatingIndicator.classList.remove('visible');
+        useLocationBtn.style.opacity = '';
+        useLocationBtn.style.pointerEvents = '';
+        showDemandCard();
+      }, 1800);
+    });
+  })();
+</script>
 </body></html>
