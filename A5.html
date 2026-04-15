@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=393, height=852, initial-scale=1.0" name="viewport"/>
+<title>Review &amp; Pay | Oasis Grill</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "background": "#101215",
+                "surface-container": "#171B20",
+                "elevated": "#1D232A",
+                "on-surface": "#F5F5F5",
+                "primary": "#C8A96B",
+                "outline-variant": "#2A3036"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "signature": "13px",
+                "container": "16px",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Inter"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #101215;
+            font-family: 'Inter', sans-serif;
+            color: #F5F5F5;
+            -webkit-font-smoothing: antialiased;
+            margin: 0;
+            padding: 0;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body class="flex items-start justify-center min-h-screen">
+<!-- Frame: Exactly 393x852px -->
+<main class="w-[393px] h-[852px] bg-[#101215] relative overflow-hidden flex flex-col">
+<!-- Header Section -->
+<header class="pt-6 px-6 flex-shrink-0">
+<h1 class="text-[16px] font-medium text-[#F2F4F7]">Review and Pay</h1>
+<div class="mt-4 h-[1px] bg-[#2A3036] w-full"></div>
+</header>
+<!-- Main Content Area -->
+<div class="flex-1 overflow-y-auto px-6 py-6">
+<div class="flex flex-col gap-6">
+<!-- Delivery Info -->
+<div class="flex flex-col gap-1">
+<p class="text-[14px] text-[#F2F4F7]">Olive &amp; Oregano • 51 S Pearl St</p>
+<p class="text-[14px] text-[#AEB4BC]">Delivery at 12:30 PM</p>
+</div>
+<!-- Order Summary Card -->
+<section class="bg-[#171B20] rounded-[16px] border border-[#2A3036] overflow-hidden">
+<div class="p-5 flex flex-col gap-4">
+<!-- Line Items -->
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<span class="text-[#F5F5F5] text-[15px] font-medium leading-snug">Rasta Pasta</span>
+<span class="text-[#F5F5F5] text-[15px] font-medium">$14.00</span>
+</div>
+<div class="flex justify-between items-start">
+<span class="text-[#F5F5F5] text-[15px] font-medium leading-snug">¼ Rotisserie Chicken dinner</span>
+<span class="text-[#F5F5F5] text-[15px] font-medium">$12.50</span>
+</div>
+<div class="flex justify-between items-start">
+<span class="text-[#F5F5F5] text-[15px] font-medium leading-snug">Argentinian Steak Sandwich</span>
+<span class="text-[#F5F5F5] text-[15px] font-medium">$16.95</span>
+</div>
+</div>
+<!-- Divider -->
+<div class="h-px bg-[#2A3036]"></div>
+<!-- Financials -->
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-center">
+<span class="text-[#AEB4BC] text-[14px]">Subtotal</span>
+<span class="text-[#F5F5F5] text-[15px] font-medium">$36.50</span>
+</div>
+<div class="flex justify-between items-center text-primary">
+<span class="text-[14px] font-medium">Group-Buy Discount</span>
+<span class="text-[15px] font-medium">-$6.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[#AEB4BC] text-[14px]">Platform Fee</span>
+<span class="text-[#F5F5F5] text-[15px] font-medium">$1.50</span>
+</div>
+<p class="text-[#AEB4BC] text-[12px] italic leading-relaxed opacity-80">Batch optimized; delivery cost reduced</p>
+</div>
+<!-- Total -->
+<div class="pt-4 border-t border-[#2A3036] flex justify-between items-center">
+<span class="text-[#F5F5F5] text-[15px] font-bold uppercase tracking-[0.1em]">Total</span>
+<span class="text-[#F5F5F5] text-[28px] font-bold tracking-tight">$38.95</span>
+</div>
+<!-- Economic Proof -->
+<div class="flex flex-col gap-1 pt-1">
+<div class="flex items-center gap-1.5 text-[11px] text-[#D1D5DB]">
+<span>Restaurant receives $37.45</span>
+</div>
+<div class="flex items-center gap-1.5 text-[11px] text-[#D1D5DB]">
+<span>Platform keeps $1.50</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Payment Method -->
+<section class="flex flex-col gap-3">
+<h2 class="text-[#F2F4F7] text-[15px] font-medium px-1">Payment Method</h2>
+<div class="rounded-[14px] border border-[#2A3036] bg-[#171B20] p-4 flex justify-between items-center active:bg-[#2A3036] transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 flex items-center justify-center bg-white rounded-md">
+<svg fill="black" height="20" viewbox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.5417 10.3958C15.5342 8.35833 17.2083 7.375 17.2833 7.32917C16.3292 5.94167 14.8583 5.75 14.3375 5.72917C13.0875 5.60417 11.8875 6.46667 11.2542 6.46667C10.6125 6.46667 9.61667 5.75833 8.57083 5.77917C7.20417 5.79583 5.94583 6.575 5.24583 7.79583C3.81667 10.2792 4.87917 13.95 6.2625 15.95C6.9375 16.9292 7.74583 18.025 8.8 17.9833C9.81667 17.9417 10.2 17.3292 11.4292 17.3292C12.65 17.3292 13.0042 17.9833 14.075 17.9625C15.1667 17.9417 15.85 16.975 16.5167 16C17.2875 14.875 17.6042 13.7875 17.6208 13.7333C17.5958 13.725 15.5667 12.95 15.5417 10.3958ZM13.475 4.35C14.0375 3.66667 14.4125 2.72917 14.3083 1.79167C13.5 1.825 12.525 2.32917 11.9458 3.00833C11.4292 3.60833 10.975 4.56667 11.0958 5.48333C11.9958 5.55417 12.9125 5.03333 13.475 4.35Z"></path>
+</svg>
+</div>
+<span class="text-[#F2F4F7] text-[15px] font-medium">Apple Pay</span>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Bottom CTA Area -->
+<div class="w-full flex-shrink-0 flex justify-center pb-10 mt-auto bg-[#101215]">
+<button class="w-[345px] rounded-[13px] text-[#101215] font-semibold text-[16px] active:scale-95 transition-transform h-[50px]" style="background-color: #C1A062;">Confirm and Pay $38.95</button>
+</div>
+</main>
+</body></html>

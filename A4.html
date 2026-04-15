@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=393, height=852, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-bright": "#3a3939",
+            "inverse-primary": "#735b25",
+            "secondary-container": "#33a461",
+            "surface-variant": "#353534",
+            "secondary-fixed": "#8bf9ad",
+            "surface-container-high": "#2a2a2a",
+            "primary-fixed-dim": "#e3c282",
+            "primary-fixed": "#ffdea0",
+            "on-background": "#e5e2e1",
+            "background": "#0B0B0B",
+            "primary": "#e5c484",
+            "secondary-fixed-dim": "#6fdc93",
+            "on-surface-variant": "#d0c5b5",
+            "tertiary": "#c8c8c8",
+            "surface": "#131313",
+            "on-primary-fixed": "#261a00",
+            "inverse-surface": "#e5e2e1",
+            "tertiary-container": "#acadad",
+            "on-secondary": "#00391b",
+            "tertiary-fixed": "#e2e2e2",
+            "inverse-on-surface": "#313030",
+            "surface-container": "#201f1f",
+            "outline": "#998f81",
+            "on-tertiary": "#2f3131",
+            "error": "#ffb4ab",
+            "surface-tint": "#e3c282",
+            "on-primary-fixed-variant": "#5a430f",
+            "surface-container-highest": "#353534",
+            "on-surface": "#F5F5F5",
+            "on-secondary-fixed-variant": "#00522a",
+            "on-error": "#690005",
+            "surface-container-low": "#131313",
+            "tertiary-fixed-dim": "#c6c6c7",
+            "on-primary-container": "#533d09",
+            "on-tertiary-container": "#3f4141",
+            "surface-dim": "#131313",
+            "on-error-container": "#ffdad6",
+            "error-container": "#93000a",
+            "surface-container-lowest": "#0e0e0e",
+            "outline-variant": "#4d463a",
+            "on-tertiary-fixed": "#1a1c1c",
+            "on-tertiary-fixed-variant": "#454747",
+            "primary-container": "#c8a96b",
+            "on-primary": "#131313",
+            "on-secondary-container": "#003117",
+            "secondary": "#3FAE6A",
+            "on-secondary-fixed": "#00210d"
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            headline: ['Inter', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+            label: ['Inter', 'sans-serif']
+          },
+          borderRadius: {
+            'signature': '13px',
+            'container': '16px'
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      background-color: #101215;
+      color: #F5F5F5;
+      font-family: 'Inter', sans-serif;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="flex justify-center items-start min-h-screen">
+<!-- iPhone 16 Canvas -->
+<main class="w-[393px] h-[852px] bg-[#101215] relative flex flex-col overflow-hidden">
+<!-- Header Section -->
+<header class="pt-6 px-6 flex-shrink-0">
+<h1 class="text-[16px] font-medium text-[#F2F4F7]">Olive &amp; Oregano · Delivery at 12:30 PM</h1>
+<div class="mt-4 h-[1px] bg-[#2A3036] w-full"></div>
+</header>
+<!-- Content Area -->
+<div class="flex-1 px-6 flex flex-col mt-10 gap-6">
+<!-- Main Reward Card (Centerpiece) -->
+<div class="w-full bg-[#1D232A] border border-[#2A3036] rounded-[20px] p-8 flex flex-col gap-3">
+<h3 class="text-[15px] font-medium text-[#C1A062] uppercase tracking-wider">Group Discount Unlocked</h3>
+<div class="flex flex-col gap-1">
+<span class="text-[36px] font-bold tracking-[-0.03em] text-[#F5F5F5]">You saved $1.40</span>
+<p class="text-[14px] font-normal text-[#AEB4BC]">22 people ordered together</p>
+</div>
+</div>
+<!-- Early Dispatch Message -->
+<div class="flex flex-col gap-2 px-2">
+<p class="text-[16px] font-medium text-[#F2F4F7] leading-snug">
+          Your batch was dispatched <span class="text-[#C1A062]">4 minutes ahead</span> of schedule
+        </p>
+<p class="text-[14px] font-normal text-[#8A9199]">
+          High demand helped your order move earlier
+        </p>
+</div>
+</div>
+<!-- Bottom CTA -->
+<div class="w-full flex justify-center pb-10 mt-auto">
+<button class="w-[345px] h-[50px] rounded-[13px] text-[#101215] font-semibold text-[16px] active:scale-95 transition-transform" style="background-color: #C1A062;">
+        Continue to Checkout
+      </button>
+</div>
+</main>
+</body></html>

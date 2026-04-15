@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>1LT Systems | Cluster Orchestration</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "custom-bg": "#0B0B0B",
+                        "custom-surface": "#171B20",
+                        "custom-elevated": "#1D232A",
+                        "custom-primary": "#F2F4F7",
+                        "custom-secondary": "#AEB4BC",
+                        "custom-border": "#2A3036",
+                        "primary": "#e5c484", // From Design System for accents if needed
+                        "surface-container-low": "#1c1b1b"
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "cluster": "16px",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0B0B0B;
+            color: #F2F4F7;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .cluster-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* Material Symbols overrides for thin-stroke institutional look */
+        .material-symbols-outlined {
+            font-variation-settings: 'wght' 200, 'opsz' 24;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-full px-16 py-12">
+<!-- MAIN AREA: CLUSTER STATES -->
+<main class="w-full flex-grow flex flex-col justify-center space-y-6 overflow-y-auto">
+<!-- CLUSTER A (Downtown) - LOCKED -->
+<section class="border border-[#2A3036] rounded-cluster p-6 cluster-transition shadow-2xl bg-[#14181D]">
+<div class="flex justify-between items-start mb-4">
+<div class="space-y-1">
+<h2 class="text-[13px] font-bold uppercase tracking-[0.15em] text-[#F2F4F7]">Cluster A — Downtown</h2>
+<div class="flex items-center gap-3">
+<span class="text-[11px] font-bold bg-[#C8A96B] text-[#0B0B0B] px-2 py-0.5 rounded-sm">LOCKED</span>
+<span class="text-[#AEB4BC] text-[14px]">Orders: 25/25</span>
+<span class="text-[#AEB4BC] text-[14px] opacity-60">·</span>
+<span class="text-[#AEB4BC] text-[14px]">Closed 9 min early</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-6 border-t border-[#2A3036]/50">
+<p class="text-[14px] leading-relaxed text-[#F2F4F7] font-medium italic">
+                    AI: Extended window 4 min at 68%. Accelerated final 7 orders via signal. Throughput gain: +18% vs standard. <span class="not-italic text-[#C8A96B] ml-1">[M]</span>
+</p>
+</div>
+</section>
+<!-- CLUSTER B (North Zone) - FORMING -->
+<section class="border border-[#2A3036]/50 rounded-cluster p-6 cluster-transition bg-[#0F1216] hover:bg-[#14181D] transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="space-y-1">
+<h2 class="text-[13px] font-bold uppercase tracking-[0.15em] text-[#AEB4BC] text-opacity-90">Cluster B — North Zone</h2>
+<div class="flex items-center gap-3">
+<span class="text-[11px] font-bold border border-[#2A3036] text-[#AEB4BC] px-2 py-0.5 rounded-sm">FORMING</span>
+<span class="text-[#F2F4F7] text-[14px]">Orders: 18/25</span>
+<span class="text-[#C8A96B] text-[14px] font-semibold">72%</span>
+<span class="text-[#AEB4BC] text-[14px] opacity-60">·</span>
+<span class="text-[#AEB4BC] text-[14px]">Window: 12:15 – 12:45 PM</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-6 border-t border-[#2A3036]/30">
+<p class="text-[14px] leading-relaxed text-[#AEB4BC]">AI: Nominal flow. No intervention required. <span class="text-[#AEB4BC]/60 ml-1">[M]</span></p>
+</div>
+</section>
+<!-- CLUSTER C (East Zone) - DISPATCHED -->
+<section class="border border-[#2A3036]/50 rounded-cluster p-6 cluster-transition bg-[#0F1216] hover:bg-[#14181D] transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="space-y-1">
+<h2 class="text-[13px] font-bold uppercase tracking-[0.15em] text-[#AEB4BC] text-opacity-90">Cluster C — East Zone</h2>
+<div class="flex items-center gap-3">
+<span class="text-[11px] font-bold border border-[#2A3036] text-[#AEB4BC] px-2 py-0.5 rounded-sm">DISPATCHED</span>
+<span class="text-[#F2F4F7] text-[14px]">8 of 25 delivered</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-6 border-t border-[#2A3036]/30">
+<p class="text-[14px] leading-relaxed text-[#AEB4BC]">AI: Anticipatory formation +11 min. 31/25 yield in initial burst. <span class="text-[#AEB4BC]/60 ml-1">[M]</span></p>
+</div>
+</section>
+</main>
+<!-- BOTTOM AREA: SUMMARY METRICS -->
+<footer class="w-full mt-14 flex justify-between items-end shrink-0"><div class="flex gap-12">
+<div class="flex space-x-2 items-center">
+<span class="text-[11px] font-bold text-[#AEB4BC] uppercase tracking-widest">Active clusters:</span>
+<span class="text-[16px] font-medium text-[#F2F4F7]">14</span>
+<span class="text-[11px] text-[#C8A96B] font-bold">[I]</span>
+</div>
+<div class="flex space-x-2 items-center">
+<span class="text-[11px] font-bold text-[#AEB4BC] uppercase tracking-widest">Early closures today:</span>
+<span class="text-[16px] font-medium text-[#F2F4F7]">67%</span>
+<span class="text-[11px] text-[#C8A96B] font-bold">[M]</span>
+</div>
+<div class="flex space-x-2 items-center">
+<span class="text-[11px] font-bold text-[#AEB4BC] uppercase tracking-widest">Cost efficiency vs individual delivery:</span>
+<span class="text-[16px] font-medium text-[#3FAE6A]">+31%</span>
+<span class="text-[11px] text-[#C8A96B] font-bold">[M]</span>
+</div>
+</div>
+<div class="cursor-pointer">
+<span class="text-[11px] font-bold tracking-[0.4em] uppercase text-[#C8A96B]/70 hover:text-[#C8A96B] transition-colors duration-300">Continue</span>
+</div></footer>
+</body></html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>B1 CITY COMMAND CENTER</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#0D0D0D",
+                        "primary": "#CBA135",
+                        "on-background": "#AEB4BC",
+                        "surface": "#171B20",
+                        "outline": "#1D232A",
+                        "signal": "#CBA135",
+                        "active-node": "#CBA135",
+                        "platinum": "#AEB4BC",
+                        "muted-label": "#6E6A63",
+                        "bright-value": "#D8D6CE",
+                        "uptime-green": "#6E8F3D"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0D0D0D;
+            color: #AEB4BC;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+        .city-map-container {
+            background-color: #080808;
+            position: relative;
+        }
+        .map-refinement {
+            filter: contrast(1.2) brightness(0.4) saturate(0.2) sepia(0.3) hue-rotate(-15deg);
+        }
+        .tactical-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), linear-gradient(90deg, rgba(203, 161, 53, 0.01), rgba(0, 0, 0, 0), rgba(203, 161, 53, 0.01));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            z-index: 20;
+            opacity: 0.4;
+        }
+        
+        .map-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+        
+        .node {
+            position: absolute;
+            border-radius: 50%;
+            background: #CBA135;
+        }
+        .node-primary { width: 4px; height: 4px; background: #fff; box-shadow: 0 0 4px rgba(255, 255, 255, 0.9); }
+        .node-secondary { width: 2px; height: 2px; opacity: 0.6; background: #CBA135; }
+        
+        .pressure-zone {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(203, 161, 53, 0.115) 0%, rgba(203, 161, 53, 0.038) 40%, transparent 70%);
+            border: 1px solid rgba(203, 161, 53, 0.03);
+        }
+        .pressure-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30%;
+            height: 30%;
+            background: radial-gradient(circle, rgba(203, 161, 53, 0.23) 0%, transparent 80%);
+            border-radius: 50%;
+        }
+        
+        .route-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(203, 161, 53, 0) 0%, rgba(203, 161, 53, 0.25) 50%, rgba(203, 161, 53, 0) 100%);
+            transform-origin: left center;
+        }
+        
+        .pulse {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 4px #CBA135;
+            animation: flow 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .pulse-static {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #FFF6D6;
+            border-radius: 50%;
+            box-shadow: 0 0 8px 2px rgba(203, 161, 53, 0.25);
+            z-index: 25;
+        }
+        
+        @keyframes flow {
+            0% { transform: translateX(0); opacity: 0; }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { transform: translateX(250px); opacity: 0; }
+        }
+
+        .batch-rolling-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 30;
+            pointer-events: none;
+        }
+
+        .hub-glow-contained {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(203, 161, 53, 0.15) 0%, rgba(203, 161, 53, 0.038) 40%, transparent 70%);
+            filter: blur(8px);
+            pointer-events: none;
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="flex flex-col px-16 py-8">
+<!-- Top Metrics -->
+<header class="flex items-center gap-12 mb-8 shrink-0 border-b border-white/5 pb-8">
+<div class="flex gap-12">
+<div class="flex flex-col gap-1">
+<span class="text-[9px] font-bold tracking-[0.3em] uppercase text-platinum/40">Throughput</span>
+<span class="text-[11px] font-bold tracking-[0.2em] uppercase text-platinum">Orders: <span class="text-primary ml-1">18,420</span></span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-[9px] font-bold tracking-[0.3em] uppercase text-platinum/40">Revenue</span>
+<span class="text-[11px] font-bold tracking-[0.2em] uppercase text-platinum">GMV: <span class="text-primary ml-1">$284,500</span></span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-[9px] font-bold tracking-[0.3em] uppercase text-platinum/40">Infrastructure</span>
+<span class="text-[11px] font-bold tracking-[0.2em] uppercase text-platinum">Nodes: <span class="text-primary ml-1">142</span></span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-[9px] font-bold tracking-[0.3em] uppercase text-platinum/40">Optimization</span>
+<span class="text-[11px] font-bold tracking-[0.2em] uppercase text-primary">Efficiency: <span class="ml-1 text-primary">93.4%</span></span>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow flex gap-12 overflow-hidden mb-6">
+<!-- Section 1: Main Map Area (80% width) -->
+<div class="w-[80%] city-map-container rounded-sm border border-white/10 overflow-hidden relative group">
+<div class="tactical-overlay"></div>
+<!-- Map Hero -->
+<img alt="High-fidelity 8K tactical city orchestration layer" class="w-full h-full object-cover map-refinement" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsXyUhaDN3VJbNBFvfsvoq0Ls1AecmJv7ZP0icNGbWAVHtnw_lMQt3B3QpY81SQYezT6PJ1Y27gm1nk9p-Gd0PbmXXA_k8ke_oKgkVTtK8-QjXLbryiOBAW-p1uRyJys-p1_lJgD9rwI3TfqKddITEAGONUdkuA_2B9C8glKNSP3bbKL3_jcJhMRCHqJtk9GzXY4q_7oG-m2BBa1CaCyPlSlVF51HRcTadEiNAY_lZeN7mq0W4rO1C4FjGN9xZPLR-JXwQP0ZWflTM"/>
+<!-- Dynamic Map Data Layers -->
+<div class="map-layer">
+<!-- Analytical Pressure Zones -->
+<div class="pressure-zone w-48 h-48" style="top: 20%; left: 30%;"><div class="pressure-core"></div></div>
+<div class="pressure-zone w-32 h-32" style="bottom: 15%; right: 25%;"><div class="pressure-core"></div></div>
+<div class="pressure-zone w-40 h-40" style="top: 45%; right: 40%;"><div class="pressure-core"></div></div>
+<!-- Central Contained Glow -->
+<div class="hub-glow-contained" style="background: radial-gradient(circle, rgba(203, 161, 53, 0.25) 0%, rgba(203, 161, 53, 0.08) 40%, transparent 70%);"></div>
+<!-- Selective Deterministic Routing Paths -->
+<div class="route-line w-[300px]" style="top: 40%; left: 35%; transform: rotate(15deg);">
+<div class="pulse" style="animation-delay: 0s;"></div>
+<!-- Phase 3: Static Pulses -->
+<div class="pulse-static" style="left: 20%;"></div>
+<div class="pulse-static" style="left: 60%;"></div>
+</div>
+<div class="route-line w-[200px]" style="top: 60%; left: 50%; transform: rotate(-45deg);">
+<div class="pulse" style="animation-delay: 1.5s;"></div>
+<div class="pulse-static" style="left: 40%;"></div>
+</div>
+<div class="route-line w-[250px]" style="top: 30%; right: 20%; transform: rotate(110deg);">
+<div class="pulse" style="animation-delay: 0.8s;"></div>
+<div class="pulse-static" style="left: 30%;"></div>
+<div class="pulse-static" style="left: 75%;"></div>
+</div>
+<!-- Strategic Nodes -->
+<div class="node node-primary" style="top: 40%; left: 35%;"></div>
+<div class="node node-primary" style="top: 60%; left: 50%;"></div>
+<div class="node node-primary" style="top: 30%; right: 20%;"></div>
+<div class="node node-secondary" style="top: 25%; left: 45%;"></div>
+<div class="node node-secondary" style="top: 55%; left: 20%;"></div>
+<div class="node node-secondary" style="top: 75%; right: 35%;"></div>
+<div class="node node-secondary" style="top: 15%; right: 40%;"></div>
+<div class="node node-secondary" style="top: 48%; right: 15%;"></div>
+</div>
+<!-- Native System Identifier -->
+<div class="batch-rolling-label">
+<div class="flex items-center gap-3 px-4 py-1.5 bg-[#111111] border border-[#262626] rounded-none shadow-2xl">
+<span class="w-1.5 h-1.5 bg-[#6E8F3D] rounded-full"></span>
+<span class="text-[10px] font-bold tracking-[0.4em] uppercase text-[#FFF6D6]">BATCH ROLLING</span>
+</div>
+</div>
+</div>
+<!-- Section 2: AI Decision Log (20% width) -->
+<div class="w-[20%] flex flex-col pt-2 shrink-0 border-l border-white/5 pl-8 relative">
+<div class="flex items-center justify-between mb-6">
+<span class="text-[10px] font-bold tracking-[0.3em] uppercase text-platinum/40" style="color: #6E6A63;">SYSTEM LOG</span>
+<span class="w-2 h-2 rounded-full border border-primary/50 flex items-center justify-center"><span class="w-0.5 h-0.5 bg-primary rounded-full"></span></span>
+</div>
+<div class="scrollbar-hide space-y-6 flex-grow">
+<div class="text-[11px] leading-relaxed tracking-wide group cursor-default border-l border-primary/20 pl-4 py-1">
+<span class="text-platinum/30 block mb-1">12:14 — <span class="text-primary/70 uppercase tracking-widest font-bold">ALBANY NORTH</span></span>
+<span class="text-platinum/80 group-hover:text-white transition-colors">Downtown pressure zone at 68% threshold. AI extended window 6 min. Batch locked 9 min ahead of schedule.</span>
+</div>
+<div class="text-[11px] leading-relaxed tracking-wide group cursor-default border-l border-white/5 pl-4 py-1">
+<span class="text-platinum/30 block mb-1">12:21 — <span class="text-primary/70 uppercase tracking-widest font-bold">GRID SECTOR 4</span></span>
+<span class="text-platinum/80 group-hover:text-white transition-colors">Route 3 pulse delay detected. AI rerouted 8 active orders via Node C. All ETAs synchronized.</span>
+</div>
+<div class="text-[11px] leading-relaxed tracking-wide group cursor-default border-l border-white/5 pl-4 py-1">
+<span class="text-platinum/30 block mb-1">12:23 — <span class="text-primary/70 uppercase tracking-widest font-bold">ORCHESTRATOR</span></span>
+<span class="text-platinum/80 group-hover:text-white transition-colors">Node B underutilized. AI shifted 14 order pulses from Hub Core. Network rebalanced.</span>
+</div>
+<div class="text-[11px] leading-relaxed tracking-wide group cursor-default border-l pl-4 py-1 border-primary/80">
+<span class="text-[#8A8A8A] block mb-1">12:31 — <span class="text-[#CBA135] uppercase tracking-widest font-bold">ZONE 3</span></span>
+<span class="text-platinum group-hover:text-white transition-colors"><span class="text-white">Demand spike in olive cluster, +22%. AI pre-formed cluster routing before peak. 31 orders captured.</span></span>
+</div>
+</div>
+<!-- Phase 2: Live Audience Module -->
+<div class="mt-auto pt-4 border-t border-white/5 mb-4">
+<div class="bg-[#101010] border p-4 border-[#1E1E1E]">
+<div class="text-[9px] font-bold tracking-[0.3em] uppercase text-[#6E6A63] mb-3">LIVE AUDIENCE</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<span class="text-[8px] tracking-widest text-[#6E6A63] uppercase leading-none">Viewers</span>
+<span class="text-[10px] font-bold text-[#D8D6CE] leading-none">1,296</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[8px] tracking-widest text-[#6E6A63] uppercase leading-none">Peak Today</span>
+<span class="text-[10px] font-bold text-[#D8D6CE] leading-none">2,913</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[8px] tracking-widest text-[#6E6A63] uppercase leading-none">Attention</span>
+<span class="text-[10px] font-bold text-[#6E8F3D] leading-none">76%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Phase 1: Telemetry Strip -->
+<div class="w-full flex border-t border-[#1E1E1E] h-10 items-center justify-between px-0 mb-4">
+<div class="flex items-center gap-12 w-[80%] pr-8 h-full">
+<div class="flex items-center gap-2">
+<span class="text-[8px] font-bold tracking-[0.2em] uppercase text-[#6E6A63]">Live Status:</span>
+<span class="text-[9px] font-bold tracking-[0.1em] uppercase text-[#6E8F3D]">Active</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[8px] font-bold tracking-[0.2em] uppercase text-[#6E6A63]">Route Load:</span>
+<span class="text-[9px] font-bold tracking-[0.1em] uppercase text-[#D8D6CE]">68% Threshold</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[8px] font-bold tracking-[0.2em] uppercase text-[#6E6A63]">Cluster State:</span>
+<span class="text-[9px] font-bold tracking-[0.1em] uppercase text-[#D8D6CE]">4 Active / 1 Forming</span>
+</div>
+</div>
+<div class="w-[20%] pl-8 flex items-center h-full">
+<div class="flex items-center gap-2">
+<span class="text-[8px] font-bold tracking-[0.2em] uppercase text-[#6E6A63]">Batch Engine:</span>
+<span class="text-[9px] font-bold tracking-[0.1em] uppercase text-[#CBA135]">Synchronized</span>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="flex justify-between items-center shrink-0 border-t border-white/5 pt-8">
+<div class="flex gap-12">
+<div class="flex flex-col gap-1">
+<span class="text-[8px] font-bold tracking-[0.2em] uppercase text-[#6E6A63]">Uptime <span class="text-[#6E8F3D] ml-1">99.8%</span></span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-[8px] font-bold tracking-[0.2em] uppercase text-[#6E6A63]">Success Rate <span class="text-[#D8D6CE] ml-1">98.4%</span></span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-[8px] font-bold tracking-[0.2em] uppercase text-[#6E6A63]">Location <span class="text-[#D8D6CE] ml-1 tracking-widest">ALBANY TERMINAL</span></span>
+</div>
+</div>
+<div class="cursor-pointer flex items-center gap-2 group">
+<span class="text-[11px] font-bold tracking-[0.4em] uppercase text-[#CBA135] transition-colors duration-300">Continue</span>
+<span class="material-symbols-outlined text-[#CBA135] text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ffb4ab",
+                        "outline-variant": "#4d463a",
+                        "tertiary-container": "#acadad",
+                        "inverse-on-surface": "#313030",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-tint": "#e3c282",
+                        "primary-container": "#c8a96b",
+                        "on-primary-fixed-variant": "#5a430f",
+                        "secondary-container": "#33a461",
+                        "surface-variant": "#353534",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-surface-variant": "#d0c5b5",
+                        "on-secondary": "#00391b",
+                        "secondary-fixed": "#8bf9ad",
+                        "surface-container-highest": "#353534",
+                        "on-secondary-fixed-variant": "#00522a",
+                        "inverse-primary": "#735b25",
+                        "surface": "#101215",
+                        "on-primary": "#402d00",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary-container": "#533d09",
+                        "tertiary-fixed": "#e2e2e2",
+                        "secondary-fixed-dim": "#6fdc93",
+                        "primary-fixed": "#ffdea0",
+                        "on-secondary-fixed": "#00210d",
+                        "surface-dim": "#101215",
+                        "primary-fixed-dim": "#e3c282",
+                        "secondary": "#6fdc93",
+                        "outline": "#998f81",
+                        "surface-container": "#171B20",
+                        "inverse-surface": "#F2F4F7",
+                        "on-surface": "#F2F4F7",
+                        "on-primary-fixed": "#261a00",
+                        "on-tertiary": "#2f3131",
+                        "surface-container-high": "#1D232A",
+                        "on-background": "#F2F4F7",
+                        "primary": "#e5c484",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "tertiary": "#c8c8c8",
+                        "on-tertiary-container": "#3f4141",
+                        "surface-bright": "#3a3939",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-secondary-container": "#003117",
+                        "background": "#101215"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #101215;
+            font-family: 'Inter', sans-serif;
+            color: #F2F4F7;
+            -webkit-font-smoothing: antialiased;
+            margin: 0;
+            padding: 0;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom filter for consistent muted/desaturated look */
+        .food-thumb-filter {
+            filter: saturate(0.85) contrast(1.05);
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="flex justify-center bg-[#101215]">
+<!-- iPhone 16 Container (393x852) -->
+<main class="w-[393px] min-h-[852px] bg-[#101215] relative flex flex-col overflow-hidden">
+<!-- Header Section -->
+<header class="pt-6 px-6">
+<h1 class="text-[16px] font-medium text-[#F2F4F7]">Olive &amp; Oregano · Delivery at 12:30 PM</h1>
+<div class="mt-4 h-[1px] bg-[#2A3036] w-full"></div>
+</header>
+<!-- Live Demand Strip -->
+<section class="mt-4 px-6">
+<div class="bg-[#1D232A] border border-[#2A3036] rounded-[14px] flex items-center gap-3 py-[14px] px-4" style="background-color: #1D232A; border: 1px solid #2A3036;">
+<div class="w-2 h-2 rounded-full bg-[#3FAE6A] shrink-0"></div>
+<p class="text-[14px] font-normal flex-grow leading-tight text-[#F2F4F7]">Batch forming: <span class="font-semibold">6</span> more orders needed to unlock your group discount</p>
+</div>
+</section>
+<!-- Menu List -->
+<section class="mt-[20px] px-6 flex-grow">
+<!-- Item 1 -->
+<div class="h-[72px] flex items-center justify-between border-b border-[#2A3036]">
+<div class="flex items-center gap-4">
+<div class="w-[52px] h-[52px] rounded-[12px] bg-[#2A3036] overflow-hidden flex-shrink-0">
+<img alt="Rasta Pasta" class="w-full h-full object-cover food-thumb-filter" src="https://lh3.googleusercontent.com/aida/ADBb0ujao7UySEpGvjsgnTYqRR_Dus5rCnedgzjqUE1WLbhVq1v7abhvzsm9QY1KZBZnPOOLMbmQuzLFi7PVMjHfYGs7GD_nPlxZyKL96mdW3cnCxPpOSHSkeDWyuJtr_mMZ7xAazOl3GkMl7OxIDPFFaHJ3q8DEk18mCJ04ple3QpS_7L33Ct2pE7N7GPYnKv44RYHf2Fno1D5cCw_3ZlhOzXtdiiF_NKJtcGrpuIOnOpJiR4YJeHpZxCFhHb7OYbS1g8i9C3KQzlFP5w"/>
+</div>
+<div class="flex flex-col">
+<span class="text-[15px] font-medium text-[#F2F4F7]">Rasta Pasta</span>
+<span class="text-[14px] font-normal text-[#AEB4BC]">$14.00</span>
+</div>
+</div>
+<button class="h-8 px-5 bg-[#171B20] border border-[#2A3036] rounded-[10px] text-[13px] font-medium text-[#F2F4F7] active:scale-95 transition-transform">
+                    Add
+                </button>
+</div>
+<!-- Item 2 -->
+<div class="h-[72px] flex items-center justify-between border-b border-[#2A3036]">
+<div class="flex items-center gap-4">
+<div class="w-[52px] h-[52px] rounded-[12px] bg-[#2A3036] overflow-hidden flex-shrink-0">
+<img alt="Grilled Chicken Bowl" class="w-full h-full object-cover food-thumb-filter" src="https://lh3.googleusercontent.com/aida/ADBb0uiNkR4rxdEJBVk16drnjNlOV4StvjIPkwkjVwECvQsPYdYGu8KYRbyAkLAdOt5HDLC7PKkZZLWnBbWNx_BsIt7y5zeNKU79bXHqheCsZ62O-7C2EfJkMbFmNifAH3a1MQeBnpzjivHqPMiuhIGKm4B88gO9DjVHKyiUVZey_RihFFzr9-voLTnWyH1QRu4MqTSuLm5pMtrk4AA4xrnKCnlJQcthr_W4qAmsXevynubysKcpsu-81bhezf0U4Qt29QXvk_cRvHkNKNg"/>
+</div>
+<div class="flex flex-col">
+<span class="text-[15px] font-medium text-[#F2F4F7]">¼ Rotisserie Chicken dinner</span>
+<span class="text-[14px] font-normal text-[#AEB4BC]">$12.50</span>
+</div>
+</div>
+<button class="h-8 px-5 bg-[#171B20] border border-[#2A3036] rounded-[10px] text-[13px] font-medium text-[#F2F4F7] active:scale-95 transition-transform">
+                    Add
+                </button>
+</div>
+<!-- Item 3 -->
+<div class="h-[72px] flex items-center justify-between border-b border-[#2A3036]">
+<div class="flex items-center gap-4">
+<div class="w-[52px] h-[52px] rounded-[12px] bg-[#2A3036] overflow-hidden flex-shrink-0">
+<img alt="Veggie Wrap" class="w-full h-full object-cover food-thumb-filter" src="https://lh3.googleusercontent.com/aida/ADBb0uhbagr9p1f9DsL5smZTjt57ir_nGlOyQ2Id5aibqjypr_V7nLt8ie8BQ7hzlUBn1DxMHOqBm_Gb_n-3SMPhRSaW3wCgDHNX6CpA26-ab_kq967E7hTKg1vl91M1EMt7S5zjlZf2LzKOJw2SKOkYQYIb35dFB5Wu-DkjfpmJ6GYvmuq9yfdBz_5EBRzMDUFuaCsCLwijsHa4wZS7ZJQKkw65XbZfk8O5Zkac2-OZhtay2BWOw_fukg0mkfxBkIYfAZ3k4xvNk0SQtQ"/>
+</div>
+<div class="flex flex-col">
+<span class="text-[15px] font-medium text-[#F2F4F7]">Argentinian Steak Sandwich</span>
+<span class="text-[14px] font-normal text-[#AEB4BC]">$16.95</span>
+</div>
+</div>
+<button class="h-8 px-5 bg-[#171B20] border border-[#2A3036] rounded-[10px] text-[13px] font-medium text-[#F2F4F7] active:scale-95 transition-transform">
+                    Add
+                </button>
+</div>
+</section>
+<!-- Spacer for Sticky Cart -->
+<div class="h-[64px]"></div>
+<!-- Sticky Cart Bar -->
+<footer class="fixed bottom-0 w-[393px] h-[64px] bg-[#1D232A] border-t border-[#2A3036] flex items-center justify-between px-6 z-50" style="background-color: #1D232A; border-top: 1px solid rgba(255,255,255,0.06);">
+<span class="text-[15px] font-medium text-[#F2F4F7] tracking-tight">3 items · $43.45</span>
+<button class="text-[13px] font-bold text-[#C8A96B] tracking-[0.05em] active:opacity-70 transition-opacity">VIEW CART</button>
+</footer>
+<!-- Predicted Shared Components Integration -->
+<div class="hidden">
+<div class="w-full top-0 sticky bg-[#101215] flex justify-between items-center px-6 py-4" data-name="TopAppBar">
+<span class="material-symbols-outlined text-[#C8A96B]" data-icon="menu">menu</span>
+<span class="font-['Inter'] tracking-[0.2em] uppercase text-[13px] font-medium text-[#F2F4F7]">OASIS GRILL</span>
+<span class="material-symbols-outlined text-[#C8A96B]" data-icon="shopping_bag">shopping_bag</span>
+</div>
+</div>
+</main>
+</body></html>

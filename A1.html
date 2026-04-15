@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>1LT Systems | Location Entry</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-dim": "#101215",
+                        "on-primary": "#402d00",
+                        "surface-variant": "#171B20",
+                        "tertiary": "#c8c8c8",
+                        "secondary-fixed": "#8bf9ad",
+                        "surface-bright": "#3a3939",
+                        "on-tertiary": "#2f3131",
+                        "on-primary-container": "#533d09",
+                        "background": "#101215",
+                        "surface": "#101215",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-secondary-container": "#003117",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "inverse-on-surface": "#313030",
+                        "on-primary-fixed": "#261a00",
+                        "inverse-primary": "#735b25",
+                        "secondary-container": "#33a461",
+                        "secondary": "#6fdc93",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#3f4141",
+                        "outline": "#998f81",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-secondary-fixed": "#00210d",
+                        "on-secondary": "#00391b",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#5a430f",
+                        "outline-variant": "#2A3036",
+                        "error-container": "#93000a",
+                        "on-surface": "#F2F4F7",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "surface-container-low": "#171B20",
+                        "on-secondary-fixed-variant": "#00522a",
+                        "surface-tint": "#e3c282",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "inverse-surface": "#e5e2e1",
+                        "on-background": "#F2F4F7",
+                        "primary-fixed-dim": "#e3c282",
+                        "surface-container-high": "#2a2a2a",
+                        "primary-container": "#c8a96b",
+                        "on-surface-variant": "#AEB4BC",
+                        "surface-container": "#171B20",
+                        "primary-fixed": "#ffdea0",
+                        "primary": "#C8A96B",
+                        "surface-container-highest": "#1D232A",
+                        "secondary-fixed-dim": "#6fdc93",
+                        "tertiary-container": "#acadad",
+                        "error": "#ffb4ab"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #101215;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center min-h-screen">
+<!-- Top Wordmark -->
+<div class="mt-[52px] text-[13px] font-medium tracking-[0.08em] text-[#AEB4BC] uppercase">
+        1LT Systems
+    </div>
+<!-- Heading -->
+<h1 class="mt-[52px] text-[28px] font-semibold text-[#F2F4F7] text-center leading-tight">
+        Order food to your location
+    </h1>
+<!-- Address Entry Zone -->
+<div class="flex flex-col items-center gap-6 w-full max-w-[342px] mt-[28px]">
+<!-- Input Field -->
+<div class="relative w-[342px] h-[56px] bg-[#171B20] border border-[#2A3036] rounded-[13px] flex items-center px-4">
+<span class="material-symbols-outlined text-[#AEB4BC] text-[20px] mr-3" data-icon="location_on">location_on</span>
+<input class="bg-transparent border-none p-0 text-[15px] text-[#F2F4F7] placeholder-[#AEB4BC] focus:ring-0 w-full font-normal" placeholder="Enter your address" type="text"/>
+</div>
+<!-- OR Divider -->
+<div class="relative w-[342px] flex items-center justify-center">
+<div class="w-full h-[1px] bg-[#2A3036]"></div>
+<span class="absolute bg-[#101215] px-3 text-[11px] font-medium text-[#AEB4BC] tracking-wider uppercase">OR</span>
+</div>
+<!-- Use Current Location -->
+<button class="flex items-center gap-2 text-[#C8A96B] text-[15px] font-medium active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[14px]" data-icon="near_me">near_me</span>
+            Use Current Location
+        </button>
+</div>
+<!-- Live Demand Card -->
+<div class="w-[342px] bg-[#1D232A] border border-[#2A3036] rounded-[14px] flex items-center gap-3 py-[14px] px-4 mt-[32px]" style="background-color: #1D232A; border: 1px solid #2A3036;">
+<div class="w-2 h-2 rounded-full bg-[#3FAE6A] shrink-0"></div>
+<p class="text-[14px] font-normal flex-grow leading-tight text-[#F2F4F7]"><span class="font-semibold">14</span> people ordering in your area right now</p>
+</div>
+<!-- Continue Button -->
+<button class="mb-[40px] w-[342px] h-[50px] bg-[#C1A062] text-[#101215] text-[16px] font-semibold rounded-[14px] flex items-center justify-center transition-opacity active:opacity-90 border-none shadow-none mt-[48px]">Continue</button>
+</body></html>
