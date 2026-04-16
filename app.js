@@ -324,11 +324,15 @@ function rebindEvents() {
             cont.onclick = () => showScreen('A3');
         }
         const act = () => { if (cont) { cont.style.opacity = '1'; cont.style.pointerEvents = 'auto'; } };
+        let typingTimer;
         if (input) {
             const h = () => {
-                if (input.value.length >= 1) {
-                    act();
-                    revealDemandCard();
+                clearTimeout(typingTimer);
+                if (input.value.length >= 5) {
+                    typingTimer = setTimeout(() => {
+                        act();
+                        revealDemandCard();
+                    }, 800);
                 }
             };
             input.oninput = h; input.onkeyup = h; input.onchange = h;
