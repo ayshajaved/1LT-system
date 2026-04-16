@@ -24,7 +24,8 @@ const screens = {
     'B1_2': 'B1_2.html',
     'B1_3': 'B1_3.html',
     'B3': 'B3.html',
-    'B5': 'B5.html'
+    'B5': 'B5.html',
+    'C1': 'C1.html'
 };
 
 const popupContent = {
@@ -56,7 +57,12 @@ function showPopup(num) {
     root.innerHTML = `<div class="popup-modal"><h2 class="popup-title">${data.title}</h2><p class="popup-body">${data.body}</p><button class="popup-button">${btnLabel}</button></div>`;
     root.classList.add('active');
     state.popupShown[num] = true;
-    root.querySelector('button').addEventListener('click', () => { root.classList.remove('active'); root.innerHTML = ''; });
+    root.querySelector('button').addEventListener('click', () => {
+        root.classList.remove('active');
+        root.innerHTML = '';
+        // Popup 9 (final) — navigate to closing screen after dismissal
+        if (num === 9) showScreen('C1');
+    });
 }
 
 // GLOBAL STATE & DEFAULTS
@@ -70,7 +76,7 @@ async function showScreen(screenId) {
     const body = document.getElementById('app-body');
     
     try {
-        const isIframeTarget = screenId.startsWith('B');
+        const isIframeTarget = screenId.startsWith('B') || screenId.startsWith('C');
         const existingIframe = mount.querySelector('iframe');
         
         // OPTIMIZED SUB-STATE TRANSITION (B1_1 -> B1_2) - WITH SMOOTH FADE
